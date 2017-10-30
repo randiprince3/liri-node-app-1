@@ -1,3 +1,5 @@
+// -------------------- I. VARIABLES + INITIALIZE DATABASE --------------------
+
 const fs = require('fs');
 const request = require('request');
 const twitter = require('twitter');
@@ -5,7 +7,16 @@ const spotify = require('spotify');
 const omdb = require('omdb');
 const inputOne = process.argv[2];
 const inputTwo = process.argv.splice(3).join(" ");
+const keys = require('./keys.js');
+const client = new Twitter(keys.twitterKeys);
+const params = {
+    screen_name: 'izzykeanu',
+    count: 20
+};
 
+// -------------------- II. FUNCTIONS -------------------
+
+// Write a file
 function log() {
     fs.appendFile('./log.txt', inputOne + " " + inputTwo + ", ", function(err) {
         if (err) {
@@ -16,15 +27,7 @@ function log() {
     });
 };
 
-const keys = require('./keys.js');
-const client = new Twitter(keys.twitterKeys);
-const params = {
-    screen_name: 'izzykeanu',
-    count: 20
-};
-
-run();
-
+// Recognize commands via command line
 function run() {
     if (inputOne === "my-tweets") {
         client.get('statuses/user_timeline', params, function(error, tweets, response) {
@@ -97,3 +100,7 @@ function run() {
         });
     }
 };
+
+// -------------------- III. MAIN PROCSS --------------------
+
+run();

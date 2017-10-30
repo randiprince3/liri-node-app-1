@@ -14,41 +14,20 @@ In the command line, type 'npm install' to download node packages. Go to package
 	- do-what-it-says
 3. If no command is excuted, LIRI will output a default movie or song.
 
-## Example
-
-
 ## Technologies Used
-- Jquery for Dom Manipulation
-- AJAX for API GET/POST requests
-	- Twitter, IBM Watson Personality Insights, eBay API
-- D3 for data visualization
+- API GET/POST requests
+	- Twitter, Spotifty, OMDB
 - Node.js (npm)
-- Express.js for routing
-- Firebase for user authentication
-- Bootstrap, Google Fonts, custom CSS for styling
-- Heroku for backend Proxy APIs
-
 
 ## Directory structure
 ```none
 .
-├── assets			 // client-side application
-│   ├── css
-│   ├── fonts	
-│   ├── images
-│   ├── js
-│   ├── json
-│   ├── php
-│   └── videos	                        
-├── router                       // server-side applicatoin
-│   └── app.js			 // express configuratoin
 ├── .gitignore                   
-├── Procfile  
-├── README.md  
-├── index.html  		 // application browser
-├── package-lock.json  
-├── package.json       		 // dependencies            
-└── profile_photo.jpg                
+├── liri.js		// Main app
+├── keys.js 		// API Keys
+├── random.txt		// Default values
+├── package.json       	// Node Dependencies	          
+└── README.md               
 ```
 
 ## License

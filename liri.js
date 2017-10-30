@@ -1,32 +1,24 @@
-// -------------------- I. Packages --------------------
-var fs = require('fs');
-var Twitter = require('twitter');
-var spotify = require('spotify');
-var omdb = require('omdb');
-var request = require('request');
-var input1 = process.argv[2];
-var input2 = process.argv.splice(3).join(" ");
+const fs = require('fs');
+const request = require('request');
+const twitter = require('twitter');
+const spotify = require('spotify');
+const omdb = require('omdb');
+const inputOne = process.argv[2];
+const inputTwo = process.argv.splice(3).join(" ");
 
-// -------------------- II. FUNCTIONS -------------------
-
-// -------------------- III. MAIN PROCSS --------------------
 function log() {
-    fs.appendFile('./log.txt', input1 + " " + input2 + ", ", function(err) {
-        // If an error was experienced we say it.
+    fs.appendFile('./log.txt', inputOne + " " + inputTwo + ", ", function(err) {
         if (err) {
             console.log(err);
-        }
-        // If no error is experienced, we'll log the phrase "Content Added" to our node console.
-        else {
-            // console.log("Content Added!");
+        } else {
+            // console.log("Succesful!");
         }
     });
 };
 
-var keys = require('./keys.js');
-// console.log(keys.twitterKeys);
-var client = new Twitter(keys.twitterKeys);
-var params = {
+const keys = require('./keys.js');
+const client = new Twitter(keys.twitterKeys);
+const params = {
     screen_name: 'izzykeanu',
     count: 20
 };
@@ -34,8 +26,7 @@ var params = {
 run();
 
 function run() {
-    if (input1 === "my-tweets") {
-
+    if (inputOne === "my-tweets") {
         client.get('statuses/user_timeline', params, function(error, tweets, response) {
             if (!error) {
                 console.log('');
@@ -46,17 +37,17 @@ function run() {
                     console.log('Tweet: ' + individualTweet.text);
                     console.log('--------------------------');
                 });
-
             } else {
                 console.log(error);
             };
         });
         log();
-    } else if (input1 === "spotify-this-song") {
-        if (input2.length < 1) {
-            input2 = "The Sign Ace of Base";
+    } else if (inputOne === "spotify-this-song") {
+        if (inputTwo.length < 1) {
+
+            inputTwo = "Middle";
         };
-        spotify.search({ type: 'track', query: input2 }, function(err, data) {
+        spotify.search({ type: 'track', query: inputTwo }, function(err, data) {
             if (err) {
                 console.log('Error occurred: ' + err);
                 return;
@@ -71,13 +62,11 @@ function run() {
             console.log('--------------------------');
         });
         log();
-    } else if (input1 === "movie-this") {
-        if (input2.length < 1) {
-            input2 = "Mr. Nobody";
+    } else if (inputOne === "movie-this") {
+        if (inputTwo.length < 1) {
+            inputTwo = "Fight Club";
         };
-        // Then run a request to the OMDB API with the movie specified
-        request("http://www.omdbapi.com/?t=" + input2 + "&y=&plot=short&r=json&tomatoes=true", function(error, response, body) {
-            // If the request is successful (i.e. if the response status code is 200)
+        request("http://www.omdbapi.com/?t=" + inputTwo + "&y=&plot=short&r=json&tomatoes=true", function(error, response, body) {
             if (!error && response.statusCode === 200) {
                 console.log('');
                 console.log('OMDB Movie Information: ');
@@ -97,14 +86,13 @@ function run() {
             }
         });
         log();
-    } else if (input1 === "do-what-it-says") {
+    } else if (inputOne === "do-what-it-says") {
         log();
         fs.readFile('random.txt', 'utf8', function(err, data) {
             if (err) throw err;
-            // console.log(data);
-            var arr = data.split(',');
-            input1 = arr[0].trim();
-            input2 = arr[1].trim();
+            let arr = data.split(',');
+            inputOne = arr[0].trim();
+            inputTwo = arr[1].trim();
             run();
         });
     }

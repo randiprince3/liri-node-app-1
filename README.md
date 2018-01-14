@@ -24,7 +24,7 @@ In the command line, type 'npm install' to download node packages. Go to package
 .
 ├── .gitignore                   
 ├── liri.js		// Main app
-├── keys.js 		// API Keys
+├── keys.js 		// API Key
 ├── random.txt		// Default values
 ├── package.json       	// Node Dependencies	          
 └── README.md               
